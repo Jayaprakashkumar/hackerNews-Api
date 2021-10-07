@@ -5,6 +5,8 @@ import { stories, StoriesService } from '../../services/stories.service'
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from 'src/app/services/sharedService';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
+
 
 @Component({
   selector: 'app-stories',
@@ -16,13 +18,13 @@ export class StoriesComponent implements OnInit, OnDestroy {
 
   public topFiveStories$: stories[];
   public subscription: Subscription
-  constructor(private storiesService: StoriesService, private toastr: ToastrService, private sharedService: SharedService, private router: Router) { }
+  constructor(private storiesService: StoriesService, private toastr: ToastrService, private sharedService: SharedService, private router: Router, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
 
-    this.subscription = timer(0, 1000).pipe(
+    this.subscription = timer(0, 20000000).pipe(
       switchMap(() => this.storiesService.getAllStories())
-    ).subscribe(ele => { this.formatData(ele) })
+    ).subscribe(ele => { this.spinner.show(); this.formatData(ele); })
 
   }
 
@@ -32,7 +34,7 @@ export class StoriesComponent implements OnInit, OnDestroy {
     this.storiesService.getTopFiveStories(topFive).subscribe(res => {
       if (res) {
         this.topFiveStories$ = res;
-        console.log(this.topFiveStories$)
+        this.spinner.hide()
       }
 
     }, (error) => console.log(error));
@@ -47,7 +49,8 @@ export class StoriesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe()
+    this.subscription.unsubscribe();
+    this.spinner.hide();
   }
 
 }

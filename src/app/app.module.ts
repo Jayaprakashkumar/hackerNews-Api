@@ -10,6 +10,8 @@ import { CommentsComponent } from './pages/comments/comments.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { SharedService } from './services/sharedService';
+import { NgxSpinnerModule } from "ngx-spinner";
+
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { SharedService } from './services/sharedService';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule, 
+    NgxSpinnerModule,
     ToastrModule.forRoot()
   ],
   providers: [SharedService],

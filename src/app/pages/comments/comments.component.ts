@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { comments, CommentsService } from 'src/app/services/comments.service';
 import { SharedService } from 'src/app/services/sharedService';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-comments',
@@ -14,9 +15,10 @@ export class CommentsComponent implements OnInit, OnDestroy {
 
   public subscription: Subscription;
   public commentsList: comments[];
-  constructor(private commentService: CommentsService, private sharedService: SharedService, private router: Router) { }
+  constructor(private commentService: CommentsService, private sharedService: SharedService, private router: Router, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+    this.spinner.show();
 
     let comments;
     this.subscription = this.sharedService.currentMessage.subscribe(res => comments = res);
@@ -31,8 +33,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
 
     this.commentService.getTopThreeStories(comments.splice(0, 3)).subscribe(res => {
       this.commentsList = res;
-
-      console.log(res);
+      this.spinner.hide()
     })
   }
 
@@ -40,6 +41,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
     this.subscription.unsubscribe();
+    this.spinner.hide()
   }
 
 }
