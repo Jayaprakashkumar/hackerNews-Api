@@ -1,0 +1,25 @@
+
+<div class="row mt-5">
+    <div class="col-12 mb-4">
+        <h6 class="underline back">Stories</h6>
+    </div>
+
+    <div class="col-sm-12 col-md-6 col-xl-4" *ngFor ="let story of topFiveStories$">
+
+        <div class="stories-list text-center pt-2">
+            <div class="p-2 d-flex justify-content-between flex-column">
+                <div>
+                    <h5 class="text-center">{{story.title}}</h5>
+                    <p class="pe-2 text-end" ><span><small>Author: {{story.by}}</small></span></p>
+                </div>
+                <div>
+                    <p><span>Points:</span><span>{{story.score}}</span></p>
+                    <p><span>Posted at:</span><span>{{story.time | date:'dd/MM/yyyy'}}</span></p>
+                    <p><span>Comments:</span><span>{{story.kids?.length || 0}}</span></p>
+                </div>
+            </div>
+            <a (click)="goToComments(story.kids, story.id)"  class="link-to-comments">View comments</a>
+        </div>
+    </div>
+</div>
+ 

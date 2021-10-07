@@ -1,0 +1,31 @@
+.stories-list {
+    box-shadow: 0 14px 30px -18px rgb(0 0 0 / 30%);
+    transition: all 300ms ease;
+    width: 95%;
+    margin: 0 auto 4em auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #f9f9f9;
+    border-radius: 5px;
+    min-height: 300px;
+    background-color: #fff;
+
+    &:hover {
+        transform: translate(0px, -5px);
+    }
+    a:hover{
+        cursor: pointer;
+    }
+
+    .link-to-comments{
+        background-color: #5f9ea0;
+        padding: 0.4em;
+        color: #fff;
+        text-decoration: none;
+        
+        &:hover{
+            color: #000;
+        }
+    }
+}

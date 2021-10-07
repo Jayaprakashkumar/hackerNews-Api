@@ -1,0 +1,20 @@
+<div class="row mx-auto">
+
+    <div class="col-12 mb-4 d-flex justify-content-between">
+        <h6 class="underline">Comments</h6>
+        <a routerLink="stories" id=" back"> stories</a>
+
+    </div>
+    <div class="comment-list mb-4 p-3" *ngFor="let comment of commentsList">
+        <div class="col-sm-12 col-md-4 col-lg-4  float-start d-flex justify-content-center align-items-center">
+            <div>
+                <p>{{comment.time | date:'dd/MM/yyyy'}}</p>
+                <p>By {{comment.by}}</p>
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-md-8  col-lg-8  float-start d-flex justify-content-start align-items-center">
+            <p class="custom-border">{{comment.text}}</p>
+        </div>
+    </div>
+</div>
